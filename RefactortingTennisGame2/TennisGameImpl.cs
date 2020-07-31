@@ -3,7 +3,7 @@ namespace RefactortingTennisGame2
     public class TennisGameImpl : ITennisGame
     {
         private Player Player1;
-        public Player Player2;
+        private Player Player2;
 
         public TennisGameImpl(string player1Name, string player2Name)
         {
