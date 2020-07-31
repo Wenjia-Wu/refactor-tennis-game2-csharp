@@ -14,11 +14,6 @@ namespace RefactortingTennisGame2
         public string GetScore()
         {
             string score = "";
-            if (Player1.Point == Player2.Point && Player1.Point < 4)
-            {
-                score = Player1.GetResult();
-                score += "-All";
-            }
 
             score = GetReuceScore(score);
 
@@ -31,11 +26,14 @@ namespace RefactortingTennisGame2
             return score;
         }
         
-        private string GetReuceScore(string s)
-        {
-            if (Player1.Point == Player2.Point && Player1.Point >= 3)
-                s = "Deuce";
-            return s;
+        private string GetReuceScore(string score)
+        { 
+            if (Player1.Point == Player2.Point)
+            {
+                score = Player1.Point < 4 ? Player1.GetResult() + "-All" : "Deuce";
+            }
+
+            return score;
         }
 
         private string GetAdvantageScore(string score)
