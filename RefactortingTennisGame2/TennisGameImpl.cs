@@ -16,12 +16,7 @@ namespace RefactortingTennisGame2
             string score = "";
             if (Player1.Point == Player2.Point && Player1.Point < 4)
             {
-                if (Player1.Point == 0)
-                    score = "Love";
-                if (Player1.Point == 1)
-                    score = "Fifteen";
-                if (Player1.Point == 2)
-                    score = "Thirty";
+                score = Player1.GetResult();
                 score += "-All";
             }
 
