@@ -2,7 +2,7 @@ namespace RefactortingTennisGame2
 {
     public class Player
     {
-        private string Name;
+        public string Name;
         public int Point;
         public string Result;
         

@@ -28,9 +28,9 @@ namespace RefactortingTennisGame2
         
         private string GetReuceScore(string score)
         { 
-            if (Player1.Point == Player2.Point)
+            if (IsReuce())
             {
-                score = Player1.Point < 4 ? Player1.GetResult() + "-All" : "Deuce";
+                score = Player1.Point >= 3 ? "Deuce" : Player1.GetResult() + "-All";
             }
 
             return score;
@@ -38,14 +38,9 @@ namespace RefactortingTennisGame2
 
         private string GetAdvantageScore(string score)
         {
-            if (Player1.Point > Player2.Point && Player2.Point >= 3)
+            if (GetBehindPlayer().Point >= 3 && !IsReuce())
             {
-                score = "Advantage player1";
-            }
-
-            if (Player2.Point > Player1.Point && Player1.Point >= 3)
-            {
-                score = "Advantage player2";
+                score = "Advantage " + GetLeadPlayer().Name;
             }
 
             return score;
@@ -89,6 +84,21 @@ namespace RefactortingTennisGame2
             }
 
             return score;
+        }
+        
+        public Player GetLeadPlayer()
+        {
+            return Player1.Point > Player2.Point ? Player1 : Player2;
+        }
+        
+        private Player GetBehindPlayer()
+        {
+            return Player1.Point > Player2.Point ? Player2 : Player1;
+        }
+
+        private bool IsReuce()
+        {
+            return Player1.Point.Equals(Player2.Point);
         }
 
         public void P1Score()
