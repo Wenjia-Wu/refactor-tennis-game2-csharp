@@ -13,59 +13,42 @@ namespace RefactortingTennisGame2
 
         public string GetScore()
         {
-            string score = "";
-
             if (IsReuce())
             {
-                return GetReuceScore(score);
+                return GetReuceScore();
+            }
+
+            if (IsWinPoint())
+            {
+                return GetWinnerScore();
             }
             
-            score = GetAdvantageScore(score);
-
-            score = GetDefaultScore(score);
-
-            score = GetAdvantageScore(score);
-
-            score = GetWinnerScore(score);
-
-            return score;
-        }
-
-        private string GetReuceScore(string score)
-        {
-            score = Player1.Point >= 3 ? "Deuce" : Player1.GetResult() + "-All";
-
-            return score;
-        }
-
-        private string GetAdvantageScore(string score)
-        {
-            if (GetBehindPlayer().Point >= 3)
+            if (IsAdvancePoint())
             {
-                score = "Advantage " + GetLeadPlayer().Name;
+                return GetAdvantageScore();
             }
 
-            return score;
+            return GetDefaultScore();
         }
 
-        private string GetWinnerScore(string score)
+        private string GetReuceScore()
         {
-            if (GetLeadPlayer().Point >= 4 && GetLeadPlayer().Point - GetBehindPlayer().Point >= 2)
-            {
-                score = "Win for " + GetLeadPlayer().Name;
-            }
-
-            return score;
+            return Player1.Point >= 3 ? "Deuce" : Player1.GetResult() + "-All";
         }
 
-        private string GetDefaultScore(string score)
+        private string GetAdvantageScore()
         {
-            if (GetBehindPlayer().Point == 0 || GetLeadPlayer().Point < 4)
-            {
-                return Player1.GetResult() + "-" + Player2.GetResult();
-            }
+            return "Advantage " + GetLeadPlayer().Name;
+        }
 
-            return score;
+        private string GetWinnerScore()
+        {
+            return "Win for " + GetLeadPlayer().Name;
+        }
+
+        private string GetDefaultScore()
+        {
+            return Player1.GetResult() + "-" + Player2.GetResult();
         }
         
         public Player GetLeadPlayer()
@@ -81,6 +64,16 @@ namespace RefactortingTennisGame2
         private bool IsReuce()
         {
             return Player1.Point.Equals(Player2.Point);
+        }
+
+        private bool IsWinPoint()
+        {
+            return GetLeadPlayer().Point >= 4 && GetLeadPlayer().Point - GetBehindPlayer().Point >= 2;
+        }
+
+        private bool IsAdvancePoint()
+        {
+            return GetBehindPlayer().Point >= 3;
         }
 
         public void P1Score()
