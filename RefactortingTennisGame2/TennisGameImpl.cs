@@ -60,24 +60,9 @@ namespace RefactortingTennisGame2
 
         private string GetDefaultScore(string score)
         {
-            if (Player1.Point > 0 && Player2.Point == 0)
+            if (GetBehindPlayer().Point == 0 || GetLeadPlayer().Point < 4)
             {
-                score = Player1.GetResult() + "-" + Player2.GetResult();
-            }
-
-            if (Player2.Point > 0 && Player1.Point == 0)
-            {
-                score = Player1.GetResult() + "-" + Player2.GetResult();
-            }
-
-            if (Player1.Point > Player2.Point && Player1.Point < 4)
-            {
-                score = Player1.GetResult() + "-" + Player2.GetResult();
-            }
-
-            if (Player2.Point > Player1.Point && Player2.Point < 4)
-            {
-                score = Player1.GetResult() + "-" + Player2.GetResult();
+                return Player1.GetResult() + "-" + Player2.GetResult();
             }
 
             return score;
