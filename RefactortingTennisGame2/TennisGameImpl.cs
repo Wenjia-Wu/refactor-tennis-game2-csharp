@@ -50,14 +50,9 @@ namespace RefactortingTennisGame2
 
         private string GetWinnerScore(string score)
         {
-            if (Player1.Point >= 4 && Player2.Point >= 0 && (Player1.Point - Player2.Point) >= 2)
+            if (GetLeadPlayer().Point >= 4 && GetLeadPlayer().Point - GetBehindPlayer().Point >= 2)
             {
-                score = "Win for player1";
-            }
-
-            if (Player2.Point >= 4 && Player1.Point >= 0 && (Player2.Point - Player1.Point) >= 2)
-            {
-                score = "Win for player2";
+                score = "Win for " + GetLeadPlayer().Name;
             }
 
             return score;
